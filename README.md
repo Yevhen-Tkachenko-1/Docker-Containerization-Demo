@@ -23,7 +23,9 @@ Demo is based on LinkedIn Learning courses:
     * [Containerize function with CLI](#containerize-function-with-cli)
     * [Build and Containerize function with Dockerfile](#build-and-containerize-function-with-dockerfile)
     * [Build and Containerize service with Dockerfile](#build-and-containerize-service-with-dockerfile)
-    * [Cleanup](#cleanup)    
+    * [Cleanup](#cleanup)
+    * [Port Publishing](#port-publishing)
+    * [Volumes](#volumes)
 * [Docker Project](#docker-project)
 * [Docker Compose](#docker-compose)
 
@@ -243,7 +245,43 @@ And also have access directly from browser in our computer:
 
 ![](image/31.PNG)
 
+#### Volumes
 
+In order to save runtime generated data, 
+we can use dedicated Docker storage named Volume.
+
+First, let's create volume:
+
+- Run `docker volume create logs-volume`
+- Run `docker volume ls`
+- Run `docker volume inspect logs-volume`
+
+![](image/32.PNG)
+
+In Docker Desktop it's reflected like this:
+
+![](image/33.PNG)
+
+Now we are good to run new container that will populate our volume:
+
+- Run `docker run --name logs-container --entrypoint sh -v logs-volume:/logs ubuntu -c "echo 'Hello Yevhen!' > /logs/file.txt && cat /logs/file.txt"` 
+
+![](image/34.PNG)
+
+We've just created and started function container that produced `Hello Yevhen!` line 
+and saved it to file `file.txt`.
+
+Now we are safe to delete container:
+
+- Run `docker ps -a`
+- Run `docker remove logs-container`
+- Run `docker ps -a`
+
+![](image/35.PNG)
+
+and have data in `logs-volume`:
+
+![](image/36.PNG)
 
 ## Docker Project
 
