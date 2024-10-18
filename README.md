@@ -22,7 +22,7 @@ Demo is based on LinkedIn Learning courses:
     * [Containerize Function with CLI](#containerize-function-with-cli)
     * [Build and Containerize function with Dockerfile](#build-and-containerize-function-with-dockerfile)
     * [Build and Containerize service with Dockerfile](#build-and-containerize-service-with-dockerfile)
-<!-- TOC -->
+    * [Cleanup](#cleanup)    
 
 ## Preparation
 
@@ -157,6 +157,56 @@ Also, in Docker Desktop we have nice UI to check our containers:
 and images:
 
 ![](image/21.PNG)
+
+#### Cleanup
+
+Once containers are stopped, and we don't need them anymore, 
+we can delete resources to free space in our machine:
+
+- Run `docker remove 38c` (where `38c` is your container id)
+
+![](image/22.PNG)
+
+- Run `docker ps -a`
+
+![](image/23.PNG)
+
+As we can see, `clock-server-container` is not there anymore.
+
+There is way to delete all containers at once:
+
+- Run `docker ps -aq | ForEach-Object { docker rm $_ }`
+- Run `docker ps -a`
+
+![](image/24.PNG)
+
+Once depending containers are stopped (or deleted),
+we are good to delete images as well.
+First, let's check what we have:
+
+- Run `docker images`
+
+![](image/25.PNG)
+
+Now, let's delete first one by tag:
+
+- Run `docker rmi clock-server-image`
+- Run `docker images`
+
+![](image/26.PNG)
+
+As we can see, `clock-server-image` is not there anymore.
+
+In a similar way as for containers, we can delete all images at once:
+
+- Run `docker images -aq | ForEach-Object { docker rmi $_ }`
+- Run `docker images`
+
+![](image/27.PNG)
+
+
+
+
 
 
 
