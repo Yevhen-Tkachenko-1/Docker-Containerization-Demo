@@ -39,7 +39,7 @@ Let's open PowerShell and check if docker is available:
 
 There is an explicit way to create and start container:
 
-- Run `docker container create hello-world:linux`
+- Run `docker container create --name hello-world-container hello-world:linux`
 
 ![](image/2.PNG)
 
@@ -52,7 +52,7 @@ meaning we don't need to create our own image, instead we can use existing one.
 
 We checked for all existing containers and see that our one was successfully created.
 
-- Run `docker container start a53` (replace `a53` with your actual container id)
+- Run `docker container start 9ea` (replace `9ea` with your actual container id)
 
 ![](image/4.PNG)
 
@@ -64,19 +64,19 @@ We see that our container has exited means it was successfully run and stopped
 as it has no continuous task, just prints some output.
 Let's check what was printed:
 
-- Run `docker logs a53` (replace `a53` with your actual container id)
+- Run `docker logs 9ea` (replace `9ea` with your actual container id)
 
 ![](image/6.PNG)
 
 In order to enter execution process, we can start container this way:
 
-- Run `docker container start --attach a53`
+- Run `docker container start --attach 9ea`
 
 ![](image/7.PNG)
 
 Now, we are going to try shorter way to create and start container:
 
-- Run `docker run hello-world:linux`
+- Run `docker run --name hello-world-quick-container hello-world:linux`
 
 ![](image/8.PNG)
 
@@ -100,7 +100,7 @@ using `Dockerfile` as [here](application/datetime/Dockerfile).
 From 2 last lines of output we see that image was created and named.
 So, we are ready to run new container based on that image:
 
-- Run `docker run clock-app-image`
+- Run `docker run --name clock-app-container clock-app-image`
 
 ![](image/11.PNG)
 
@@ -129,17 +129,17 @@ and corresponding `server-clock.Dockerfile` [here](application/server/server-clo
 
 ![](image/15.PNG)
 
-- Run `docker logs 86f` (replace `86f` with your actual container id)
+- Run `docker logs 38c` (replace `38c` with your actual container id)
 
 ![](image/16.PNG)
 
-- Run `docker exec 86f date`
+- Run `docker exec 38c date`
 
 ![](image/17.PNG)
 
 As our server is running forever, we have to stop it manually:
 
-- Run `docker stop 86f` (replace `86f` with your actual container id)
+- Run `docker stop 38c` (replace `38c` with your actual container id)
 
 ![](image/18.PNG)
 
