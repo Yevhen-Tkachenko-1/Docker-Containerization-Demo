@@ -4,7 +4,8 @@ _Containerize backend services using Docker CLI, Dockerfile and Docker Compose_
 
 Demo is based on LinkedIn Learning courses:
 - [Learning Docker](https://www.linkedin.com/learning/learning-docker-17236240)
-- 
+- [Docker: Your First Project](https://www.linkedin.com/learning/docker-your-first-project)
+- [Learning Docker Compose](https://www.linkedin.com/learning/learning-docker-compose)
 
 #### Tech stack
 
@@ -19,10 +20,12 @@ Demo is based on LinkedIn Learning courses:
 
 * [Preparation](#preparation)
 * [Fundamentals](#fundamentals)
-    * [Containerize Function with CLI](#containerize-function-with-cli)
+    * [Containerize function with CLI](#containerize-function-with-cli)
     * [Build and Containerize function with Dockerfile](#build-and-containerize-function-with-dockerfile)
     * [Build and Containerize service with Dockerfile](#build-and-containerize-service-with-dockerfile)
     * [Cleanup](#cleanup)    
+* [Docker Project](#docker-project)
+* [Docker Compose](#docker-compose)
 
 ## Preparation
 
@@ -38,7 +41,7 @@ Let's open PowerShell and check if docker is available:
 
 ## Fundamentals
 
-#### Containerize Function with CLI
+#### Containerize function with CLI
 
 There is an explicit way to create and start container:
 
@@ -203,6 +206,49 @@ In a similar way as for containers, we can delete all images at once:
 - Run `docker images`
 
 ![](image/27.PNG)
+
+#### Port Publishing
+
+Up to this point we could have access to our app only through Docker Container.
+Is there direct way to make call to app from host machine (our computer)?
+Yes, we can expose port of our server following way.
+
+First, let's build image based on `exposed-server.bash` [source file](application/exposed-server/src/exposed-server.bash):
+
+- Go to `exposed-server` directory
+- Run `docker build -t exposed-server-image --file exposed-server.Dockerfile .`
+
+![](image/28.PNG)
+
+Next command will create and run container with port mapping, 
+where 5000 is port inside container and 5001 exposed one:
+
+- Run `docker run --name exposed-server-container -p 5001:5000 -d exposed-server-image`
+- Run `docker ps -a`
+- Run `docker logs exposed-server-container`
+
+![](image/29.PNG)
+
+We can call our server from inside container like this:
+
+- Run `docker exec -it exposed-server-container bash`
+- Type `curl http://localhost:5000`
+- Type `exit`
+
+![](image/30.PNG)
+
+And also have access directly from browser in our computer:
+
+- Open `localhost:5001`
+
+![](image/31.PNG)
+
+
+
+## Docker Project
+
+
+## Docker Compose
 
 
 
