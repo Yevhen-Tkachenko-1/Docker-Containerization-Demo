@@ -18,12 +18,13 @@ Demo is based on LinkedIn Learning courses:
 #### Content
 
 * [Preparation](#preparation)
-* [CLI basics](#cli-basics)
-* [Dockerfile](#dockerfile)
-* [Service container](#service-container)
+* [Fundamentals](#fundamentals)
+    * [Containerize Function with CLI](#containerize-function-with-cli)
+    * [Build and Containerize function with Dockerfile](#build-and-containerize-function-with-dockerfile)
+    * [Build and Containerize service with Dockerfile](#build-and-containerize-service-with-dockerfile)
+<!-- TOC -->
 
-
-#### Preparation
+## Preparation
 
 Before we can use Docker in Windows we have to install Docker Desktop and run it as described
 [here](https://docs.docker.com/desktop/install/windows-install/).
@@ -35,7 +36,9 @@ Let's open PowerShell and check if docker is available:
 
 ![](image/1.PNG)
 
-#### CLI basics
+## Fundamentals
+
+#### Containerize Function with CLI
 
 There is an explicit way to create and start container:
 
@@ -86,7 +89,7 @@ Now, we are going to try shorter way to create and start container:
 
 It took just one command to execute container interactively.
 
-#### Dockerfile
+#### Build and Containerize function with Dockerfile
 
 Now, we have simple program as `clock.bash` app source [here](application/datetime/src/clock.bash). 
 So, we can create container based on our own image 
@@ -110,7 +113,7 @@ We got simple line output from our application and now can check container state
 
 ![](image/12.PNG)
 
-#### Service container
+#### Build and Containerize service with Dockerfile
 
 Now we will interact with app that works continuously like a server.
 For this we have `server-clock.bash` app source [here](application/server/src/server-clock.bash)
@@ -146,6 +149,15 @@ As our server is running forever, we have to stop it manually:
 - Run `docker ps -a`
 
 ![](image/19.PNG)
+
+Also, in Docker Desktop we have nice UI to check our containers:
+
+![](image/20.PNG)
+
+and images:
+
+![](image/21.PNG)
+
 
 
 
